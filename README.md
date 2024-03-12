@@ -8,25 +8,26 @@ Built on: RHEL 9.3 updated up to 29-02-2024. This version is with the native lin
 
 To install: (work in progress!)
 
-- download
+Download
 - dnf remove libibverbs-46.0-1.el9.x86_6
 - wget https://rpmfind.net/linux/centos-stream/9-stream/BaseOS/x86_64/os/Packages/libpcap-1.10.0-4.el9.x86_64.rpm
 - rpm -Uvh libpcap-1.10.0-4.el9.x86_64.rpm --nodeps
 - dnf install libffi-devel net-tools python3-policycoreutils
 - rpm -i vpp*.rpm
-- Make the adjustments to the kernel to isolate VPP processes from getting interfered with other system tasks
- -- grubby --update-kernel=ALL --args="isolcpus=0-2"
+
+Make the adjustments to the kernel to isolate VPP processes from getting interfered with other system tasks
+ - grubby --update-kernel=ALL --args="isolcpus=0-2"
  - grubby --info="/boot/vmlinuz-$(uname -r)" to verify
  - After reboot check: /sys/devices/system/cpu/isolated 
- - In my case: [@nikhef-1 ~]# cat /sys/devices/system/cpu/isolated 
-                0-2
-               [@nikhef-1 ~]# 
+ - In my case:
+   [@nikhef-1 ~]# cat /sys/devices/system/cpu/isolated 
+   0-2
 
 Configuration stuff (WIP!)
-THe driver to work with a vmxnet3 adapter needs to be loaded / either manually or at boot:
+The driver to work with a vmxnet3 adapter needs to be loaded / either manually or at boot:
 
-modprobe vfio-pci
-- ifconfig ens192 down # interface i want to control with VPP/LCPNG
+- Install vfio-pci to load at boot in /etc/modules-load.d/vfio-pci.conf (file with vfio-pci)
+- ifconfig ens192 down # interface i want to control with VPP/Linux-CP
 - Disable / let NetworkManager ignore this interface as it conflicts with the bootstrap file in the next step.
 - create a file (eg 'ignore.conf') in /etc/NetworkManager/conf.d/ and add the following:
 
