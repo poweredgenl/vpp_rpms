@@ -15,7 +15,7 @@ To install: (work in progress!)
 - dnf install libffi-devel net-tools python3-policycoreutils
 - rpm -i vpp*.rpm
 - Make the adjustments to the kernel to isolate VPP processes from getting interfered with other system tasks
- - grubby --update-kernel=ALL --args="isolcpus=0-2"
+ -- grubby --update-kernel=ALL --args="isolcpus=0-2"
  - grubby --info="/boot/vmlinuz-$(uname -r)" to verify
  - After reboot check: /sys/devices/system/cpu/isolated 
  - In my case: [@nikhef-1 ~]# cat /sys/devices/system/cpu/isolated 
