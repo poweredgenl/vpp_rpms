@@ -4,7 +4,7 @@ This dir contains alpha-alpha :-) testing packages compiled for RHEL 9 for whom 
 
 Please note that this is VERY experimental as im still optimizing / figuring out a proper build proces.
 
-Built on: RHEL 9.3 updated up to 29-02-2024. This version is with the native linux-cp. A new version with IPNG's control plugin will be build later.
+Built on: RHEL 9.5 updated up to 17-04-2025. This version is with the native linux-cp. A new version with IPNG's control plugin will be build later.
 
 To install: (work in progress!)
 
